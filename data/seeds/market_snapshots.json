@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "RELIANCE",
+    "price": 2950.75,
+    "change_pct": 1.45,
+    "volume": 8500000,
+    "avg_volume": 7200000,
+    "rsi": 58.4,
+    "momentum": 12.3,
+    "volatility": 0.18,
+    "sentiment_score": 0.75,
+    "forward_return": 0.085
+  },
+  {
+    "symbol": "HDFCBANK",
+    "price": 1655.3,
+    "change_pct": -0.35,
+    "volume": 12000000,
+    "avg_volume": 11500000,
+    "rsi": 47.8,
+    "momentum": -3.1,
+    "volatility": 0.14,
+    "sentiment_score": 0.6,
+    "forward_return": 0.042
+  },
+  {
+    "symbol": "TATAMOTORS",
+    "price": 1012.1,
+    "change_pct": 2.8,
+    "volume": 15400000,
+    "avg_volume": 13000000,
+    "rsi": 64.2,
+    "momentum": 28.6,
+    "volatility": 0.24,
+    "sentiment_score": 0.82,
+    "forward_return": 0.115
+  }
+]
