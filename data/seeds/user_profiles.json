@@ -1,0 +1,48 @@
+[
+  {
+    "id": "11111111-1111-1111-1111-111111111111",
+    "email": "conservative.investor@hackverse.io",
+    "name": "Aarav Sharma (Conservative)",
+    "risk_profile": "Conservative",
+    "risk_score": 25,
+    "portfolio": [
+      {
+        "symbol": "RELIANCE",
+        "quantity": 50,
+        "avg_buy_price": 2850.0
+      },
+      {
+        "symbol": "HDFCBANK",
+        "quantity": 100,
+        "avg_buy_price": 1600.0
+      }
+    ],
+    "watchlist": [
+      "RELIANCE",
+      "HDFCBANK"
+    ]
+  },
+  {
+    "id": "22222222-2222-2222-2222-222222222222",
+    "email": "aggressive.trader@hackverse.io",
+    "name": "Riya Patel (Aggressive)",
+    "risk_profile": "Aggressive",
+    "risk_score": 80,
+    "portfolio": [
+      {
+        "symbol": "RELIANCE",
+        "quantity": 200,
+        "avg_buy_price": 2910.5
+      },
+      {
+        "symbol": "TATAMOTORS",
+        "quantity": 500,
+        "avg_buy_price": 980.25
+      }
+    ],
+    "watchlist": [
+      "RELIANCE",
+      "TATAMOTORS"
+    ]
+  }
+]
