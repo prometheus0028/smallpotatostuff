@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 from .base import BaseAgent, AgentContext
 from ..services.rag import retrieve_documents
-from ..models.agent import AgentSource
+from ..models.agent import AgentResult, AgentSource
 
 
 class FundamentalAgent(BaseAgent):

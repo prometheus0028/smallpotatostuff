@@ -8,6 +8,7 @@ import time
 from datetime import datetime
 from typing import List, Dict, Any
 from .base import BaseAgent, AgentContext
+from ..models.agent import AgentResult
 
 
 class SentimentAgent(BaseAgent):

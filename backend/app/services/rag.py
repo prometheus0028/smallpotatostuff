@@ -69,18 +69,12 @@ async def retrieve_documents(
     if _DEGRADED_MODE:
         return []
 
-    # Try to use Person 2's retrieval if available
-    # This is the adapter boundary - replace with actual implementation
+    # Call Person 2's retrieval service directly
     try:
-        from ..db.supabase_client import get_supabase_client
-        client = get_supabase_client()
-        if client:
-            return await _retrieve_from_supabase(client, symbol, query, top_k)
-    except (ImportError, AttributeError):
-        pass
-
-    # Fallback to mock data for demo
-    return _get_mock_documents(symbol, query, top_k)
+        from .retrieval import retrieve_documents as supabase_retrieve_documents
+        return supabase_retrieve_documents(symbol=symbol, query=query, top_k=top_k)
+    except Exception:
+        return []
 
 
 async def _retrieve_from_supabase(
