@@ -62,7 +62,7 @@ class SynthesisEngine:
         action = self._determine_action(risk_adjusted_score, agents)
 
         # Generate reasoning
-        reasons = self._generate_reasons(agents, market, profile, risk_adjusted_score, risk_adjustment)
+        reasons = self._generate_reasons(agents, market, profile, portfolio, risk_adjusted_score, risk_adjustment)
 
         # Collect all sources
         sources = self._collect_sources(agents)
@@ -192,6 +192,7 @@ class SynthesisEngine:
         agents: Dict[str, AgentResult],
         market: MarketData,
         profile: UserProfile,
+        portfolio: Portfolio,
         risk_adjusted_score: float,
         risk_adjustment: float,
     ) -> List[str]:

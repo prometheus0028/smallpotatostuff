@@ -29,6 +29,12 @@ DEMO_PORTFOLIOS: Dict[str, Portfolio] = {
 }
 
 
+ALIAS_MAP = {
+    "demo-conservative": "11111111-1111-1111-1111-111111111111",
+    "demo-aggressive": "22222222-2222-2222-2222-222222222222",
+}
+
+
 class PortfolioService:
     """Portfolio service."""
 
@@ -37,6 +43,42 @@ class PortfolioService:
 
     async def get_portfolio(self, user_id: str) -> Optional[Portfolio]:
         """Get portfolio by user ID."""
+        actual_id = ALIAS_MAP.get(user_id, user_id)
+
+        try:
+            from ..db.supabase import get_supabase_client
+            client = get_supabase_client()
+            if client:
+                res_port = client.table("portfolio").select("*").eq("user_id", actual_id).execute()
+                if not res_port.data and user_id != actual_id:
+                    res_port = client.table("portfolio").select("*").eq("user_id", user_id).execute()
+
+                res_watch = client.table("watchlist").select("*").eq("user_id", actual_id).execute()
+                if not res_watch.data and user_id != actual_id:
+                    res_watch = client.table("watchlist").select("*").eq("user_id", user_id).execute()
+
+                if res_port.data or res_watch.data:
+                    holdings_list = []
+                    total_val = sum(float(r.get("quantity", 0)) * float(r.get("avg_buy_price", 1)) for r in res_port.data)
+                    for r in res_port.data:
+                        val = float(r.get("quantity", 0)) * float(r.get("avg_buy_price", 1))
+                        alloc = val / total_val if total_val > 0 else 0.2
+                        holdings_list.append(Holding(
+                            symbol=str(r.get("symbol", "")),
+                            quantity=float(r.get("quantity", 0)),
+                            allocation=round(alloc, 4)
+                        ))
+
+                    watch_symbols = [str(r.get("symbol", "")) for r in res_watch.data]
+
+                    return Portfolio(
+                        user_id=user_id,
+                        holdings=holdings_list,
+                        watchlist=Watchlist(symbols=watch_symbols)
+                    )
+        except Exception:
+            pass
+
         return self._portfolios.get(user_id)
 
     async def get_available_portfolios(self) -> list[str]:
