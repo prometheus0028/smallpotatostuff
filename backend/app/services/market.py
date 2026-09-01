@@ -56,6 +56,31 @@ class MarketService:
     async def get_market_data(self, symbol: str) -> Optional[MarketData]:
         """Get market data for a symbol."""
         symbol = symbol.upper()
+
+        # Try reading from Supabase
+        try:
+            from ..db.supabase import get_supabase_client
+            client = get_supabase_client()
+            if client:
+                res = client.table("market_snapshots").select("*").eq("symbol", symbol).order("created_at", desc=True).limit(1).execute()
+                if res.data:
+                    row = res.data[0]
+                    return MarketData(
+                        symbol=str(row.get("symbol", symbol)),
+                        price=float(row.get("price", 0.0)),
+                        change_pct=float(row.get("change_pct", 0.0)),
+                        volume=float(row.get("volume", 0.0)),
+                        avg_volume=float(row.get("avg_volume", 0.0)),
+                        rsi=float(row.get("rsi", 50.0)),
+                        momentum=float(row.get("momentum", 0.0)),
+                        volatility=float(row.get("volatility", 0.15)),
+                        sector_change_pct=float(row.get("sector_change_pct", 0.0)),
+                        sentiment_score=float(row.get("sentiment_score", 0.5)),
+                        timestamp=datetime.utcnow(),
+                    )
+        except Exception:
+            pass
+
         if symbol in self._data:
             # Return a copy with updated timestamp
             data = self._data[symbol].model_copy()
