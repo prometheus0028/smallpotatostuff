@@ -32,8 +32,12 @@ app = FastAPI(
 # CORS configuration - permissive for hackathon demo
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict to frontend domain
-    allow_credentials=True,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://smallpotatostuffexe.vercel.app",
+        "*"
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
