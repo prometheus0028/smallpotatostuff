@@ -1,0 +1,109 @@
+{
+  "session_id": "demo-session-001",
+  "symbol": "RELIANCE",
+  "market": {
+    "price": 1428.5,
+    "change_pct": 2.14,
+    "volume": 18450000,
+    "avg_volume": 10200000,
+    "rsi": 68.4,
+    "momentum": 0.81,
+    "volatility": 0.23,
+    "sentiment_score": 0.72
+  },
+  "agents": {
+    "technical": {
+      "agent": "technical",
+      "status": "COMPLETE",
+      "signal": "BULLISH",
+      "confidence": 0.82,
+      "reasoning": [
+        "Positive momentum",
+        "Price is above recent baseline"
+      ],
+      "risk_flags": [],
+      "latency_ms": 420
+    },
+    "sentiment": {
+      "agent": "sentiment",
+      "status": "COMPLETE",
+      "signal": "BULLISH",
+      "confidence": 0.76,
+      "reasoning": [
+        "Positive market sentiment"
+      ],
+      "risk_flags": [],
+      "latency_ms": 380
+    },
+    "fundamental": {
+      "agent": "fundamental",
+      "status": "COMPLETE",
+      "signal": "NEUTRAL",
+      "confidence": 0.68,
+      "reasoning": [
+        "Evidence indicates mixed fundamentals"
+      ],
+      "risk_flags": [],
+      "sources": [
+        {
+          "document_id": "demo-doc-001",
+          "title": "Q4 Results",
+          "source": "Demo source",
+          "excerpt": "Demo evidence excerpt"
+        }
+      ],
+      "latency_ms": 510
+    }
+  },
+  "recommendation": {
+    "action": "HOLD",
+    "confidence": 0.78,
+    "summary": "Positive technical and sentiment signals are offset by fundamental uncertainty.",
+    "reasons": [
+      "Strong price momentum",
+      "Above-average volume",
+      "Positive sentiment",
+      "Fundamental margin pressure"
+    ],
+    "risk_adjustment": "Conservative profile limits exposure due to elevated volatility.",
+    "sources": []
+  },
+  "sources": [],
+  "reasoning_trace": [
+    { "event": "market_data_received", "message": "Market data received", "timestamp": "2026-09-01T10:57:12Z" },
+    { "event": "technical_started", "message": "Technical Agent started", "timestamp": "2026-09-01T10:57:12Z" },
+    { "event": "sentiment_started", "message": "Sentiment Agent started", "timestamp": "2026-09-01T10:57:12Z" },
+    { "event": "fundamental_started", "message": "Fundamental Agent started", "timestamp": "2026-09-01T10:57:12Z" },
+    { "event": "technical_complete", "message": "Technical Agent completed", "timestamp": "2026-09-01T10:57:13Z" },
+    { "event": "sentiment_complete", "message": "Sentiment Agent completed", "timestamp": "2026-09-01T10:57:14Z" },
+    { "event": "fundamental_complete", "message": "Fundamental Agent completed", "timestamp": "2026-09-01T10:57:15Z" },
+    { "event": "synthesis_started", "message": "Synthesis started", "timestamp": "2026-09-01T10:57:15Z" },
+    { "event": "recommendation_generated", "message": "Recommendation generated", "timestamp": "2026-09-01T10:57:16Z" }
+  ],
+  "metrics": {
+    "agent_latency_ms": 510,
+    "signal_accuracy": 0.0,
+    "portfolio_concentration": 0.35
+  },
+  "profile": {
+    "risk_profile": "CONSERVATIVE"
+  },
+  "portfolio": {
+    "holdings": [
+      {
+        "symbol": "RELIANCE",
+        "quantity": 25,
+        "avg_price": 1320,
+        "exposure": 35712,
+        "concentration_score": 0.35
+      },
+      {
+        "symbol": "HDFCBANK",
+        "quantity": 15,
+        "avg_price": 1580,
+        "exposure": 24210,
+        "concentration_score": 0.24
+      }
+    ]
+  }
+}
